@@ -8,7 +8,7 @@ Console.DescendantAdded = game:GetService("CoreGui").DescendantAdded:Connect(fun
         t.RichText = Console.RichText;
 
         if Console.RemoveTestService and string.find(t.Text, "TestService:") then
-            local Text = t.Text:gsub("TestService: ", "<font color='rgb(110, 38, 224)'>[🌌] : </font>");
+            local Text = t.Text:gsub("TestService: ", "");
             t.Text = Text;
         end;
     end;
