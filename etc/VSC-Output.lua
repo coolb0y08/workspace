@@ -25,6 +25,10 @@ if(WebSocket ~= nil)then
             getgenv()["VSC-Output"].Connection:Send(t)
         end);
         
+        ["OutputMessage"] = "{message}"
+
+        ["ErrorMessage"] = "{message}"
+        
         ["Destroy"] = (function(t)
             if(WebSocket ~= nil and getgenv()["VSC-Output"].Connection) then
                 if(getgenv()["VSC-Output"].Events.MessageOut and getgenv()["VSC-Output"].Events.ErrorDetailed)then
@@ -47,13 +51,13 @@ if(WebSocket ~= nil)then
     if(WebSocket ~= nil and getgenv()["VSC-Output"].Connection)then
         getgenv()["VSC-Output"].Events.MessageOut = LogService.MessageOut:Connect(function(m)
             if(getgenv()["VSC-Output"].RedirectOutput == true)then
-                getgenv()["VSC-Output"].Send(m)
+                getgenv()["VSC-Output"].Send(string.gsub(getgenv()["VSC-Output"].OutputMessage, "{message}", m))
             end
         end)
         
         getgenv()["VSC-Output"].Events.ErrorDetailed = ScriptContext.ErrorDetailed:Connect(function(m)
             if(getgenv()["VSC-Output"].RedirectErrors == true)then
-                getgenv()["VSC-Output"].Send(m)
+                getgenv()["VSC-Output"].Send(string.gsub(getgenv()["VSC-Output"].OutputMessage, "{message}", m))
             end
         end)
 
