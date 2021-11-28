@@ -25,9 +25,9 @@ if(WebSocket ~= nil)then
             getgenv()["VSC-Output"].Connection:Send(t)
         end);
         
-        ["OutputMessage"] = "{message}"
+        ["OutputMessage"] = "{message}";
 
-        ["ErrorMessage"] = "{message}"
+        ["ErrorMessage"] = "{message}";
         
         ["Destroy"] = (function(t)
             if(WebSocket ~= nil and getgenv()["VSC-Output"].Connection) then
